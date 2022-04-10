@@ -1,4 +1,5 @@
 from math import sqrt
+from data import filte
 
 def calc_mean(values):
     sum=0
@@ -21,7 +22,7 @@ def calc_covariance(values1, values2):
     sum=0
     mean1=calc_mean(values1)
     mean2=calc_mean(values2)
-    if len(values) == 0 | len(values2) == 0:
+    if len(values1) == 0 | len(values2) == 0:
         return 0
     for val1,val2 in zip(values1,values2):
         sum=(val1-mean1)*(val2-mean2)
@@ -29,4 +30,4 @@ def calc_covariance(values1, values2):
 
 def population_statistics(feature_description, data, treatment,
                           target, threshold, is_above,statistic_functions):
-    
+    data1, data2=
