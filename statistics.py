@@ -44,11 +44,15 @@ def population_statistics(feature_description, data, treatment,
         :param statistic_functions: a list of functions from statistics.py, an attached file
         :return: a string contains the statistic data(sum,mean,median) of the desire feature's values
         """
-    dict_above = filter_by_threshold(data, treatment, threshold, is_above)
+    if is_above:
+        data["threshold"] = [1 if a > threshold else 0 for a in data.get(treatment)]
+    else:
+        data["threshold"] = [0 if a <= threshold else 1 for a in data.get(treatment)]
+    dict_above, dict_below = filter_by_feature(data, "threshold", is_above)
     print(f"{feature_description}")
     outputs = []
     for func in statistic_functions:
-        output = func(dict_above.get(target))  # sends the appropriate data
+        output = f"{func(dict_above.get(target)):.2f}"
         outputs.append(str(output))
     print(f'{target}: ' + ', '.join(outputs))
 

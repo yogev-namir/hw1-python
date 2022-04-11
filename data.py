@@ -34,7 +34,6 @@ def print_details(data, features, statistic_functions):
     for feature in features:
         outputs = []
         for func in statistic_functions:
-            # output = f"{func(data.get(feature)):.2f}"
             output = f"{func(data.get(feature)):.2f}"
             outputs.append(str(output))
         print(f'{feature}: ' + ', '.join(outputs))
@@ -42,13 +41,14 @@ def print_details(data, features, statistic_functions):
 
 def print_joint_details(data, features, statistic_functions, statistic_functions_names):
     for func in statistic_functions:
-        print(func(data[features[0]], data[features[1]]))
+        output = f"{func(data.get(features[0]), data.get(features[1])):.2f}"
+        print(statistic_functions_names+"("+f'{features[0]}, {features[1]}'+"): "+output)
 
 
 def load_data(path, features):
     """
         gets a file's path and returns a dict- it's keys are the features givens
-        and their's value are given in the file
+        and their value are given in the file
         :param path: the file's path
         :param features: the relevant features to save
         :return: a dict with the suitable keys and values
