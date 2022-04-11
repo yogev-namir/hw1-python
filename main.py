@@ -1,11 +1,20 @@
 import sys
+import data
+import statistics
+# constant values
+SUMMER = 1
+WINTER = 3
+HOLIDAY = 1
+THRESHOLD = 13
+SECTIONS = 2
+
 
 def main(argv):
     # loading the csv, the statistic functions and features for the program
     str_input = argv[2]
     features: list = str_input.split(", ")
     dictionary = data.load_data(argv[1], features)
-    statistic_functions = [statistics.sum, statistics.mean ]
+    statistic_functions = [statistics.calc_mean, statistics.calc_stdv]
     continuous_features = features[:3]
     """
     ##############################~~QUESTION 1~~###################################

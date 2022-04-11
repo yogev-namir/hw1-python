@@ -1,35 +1,39 @@
 from math import sqrt
 from data import filter_by_feature
 
-def calc_mean(values):
-    sum=0
-    if len(values)==0:
-        return 0
-    for val in values:
-        sum+=val
-    return sum/len(values)
 
-def calc_stdv(values):
-    sum=0
-    mean=calc_mean(values)
+def calc_mean(values):
+    sum = 0
     if len(values) == 0:
         return 0
     for val in values:
-        sum+=pow(val-mean)
-    return sqrt(sum/(len(values)-1))
+        sum += val
+    return sum / len(values)
+
+
+def calc_stdv(values):
+    sum = 0
+    mean = calc_mean(values)
+    if len(values) == 0:
+        return 0
+    for val in values:
+        sum += ((val - mean) ** 2)
+    return sqrt(sum / (len(values) - 1))
+
 
 def calc_covariance(values1, values2):
-    sum=0
-    mean1=calc_mean(values1)
-    mean2=calc_mean(values2)
+    sum = 0
+    mean1 = calc_mean(values1)
+    mean2 = calc_mean(values2)
     if len(values1) == 0 | len(values2) == 0:
         return 0
-    for val1,val2 in zip(values1,values2):
-        sum=(val1-mean1)*(val2-mean2)
-    return sum/(len(values1)-1)
+    for val1, val2 in zip(values1, values2):
+        sum += (val1 - mean1) * (val2 - mean2)
+    return sum / (len(values1) - 1)
+
 
 def population_statistics(feature_description, data, treatment,
-                          target, threshold, is_above,statistic_functions):
+                          target, threshold, is_above, statistic_functions):
     """
         :param feature_description: an opening line that explain the following data source
         :param data: fixed dictionary, according to the desire feature
@@ -69,6 +73,3 @@ def filter_by_threshold(data, treatment, threshold, is_above):
         dict_1.update({key: d1_key_value})
         dict_2.update({key: d2_key_value})
     return dict_1 if is_above else dict_2
-
-
-

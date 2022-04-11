@@ -1,4 +1,7 @@
+import math
+
 import pandas
+
 
 def filter_by_feature(data, feature, values):
     """
@@ -9,7 +12,7 @@ def filter_by_feature(data, feature, values):
     """
     dict_1 = {}
     dict_2 = {}
-    values_of_feature = [0 if a==values else 1 for a in data.get(feature)]
+    values_of_feature = [0 if a == values else 1 for a in data.get(feature)]
     for key in data:
         d1_key_value = []
         d2_key_value = []
@@ -19,6 +22,7 @@ def filter_by_feature(data, feature, values):
         dict_1.update({key: d1_key_value})
         dict_2.update({key: d2_key_value})
     return dict_1, dict_2
+
 
 def print_details(data, features, statistic_functions):
     """
@@ -30,7 +34,8 @@ def print_details(data, features, statistic_functions):
     for feature in features:
         outputs = []
         for func in statistic_functions:
-            output = func(data.get(feature))
+            # output = f"{func(data.get(feature)):.2f}"
+            output = f"{func(data.get(feature)):.2f}"
             outputs.append(str(output))
         print(f'{feature}: ' + ', '.join(outputs))
 
@@ -38,6 +43,7 @@ def print_details(data, features, statistic_functions):
 def print_joint_details(data, features, statistic_functions, statistic_functions_names):
     for func in statistic_functions:
         print(func(data[features[0]], data[features[1]]))
+
 
 def load_data(path, features):
     """
