@@ -55,25 +55,3 @@ def population_statistics(feature_description, data, treatment,
         output = f"{func(dict_above.get(target)):.2f}"
         outputs.append(str(output))
     print(f'{target}: ' + ', '.join(outputs))
-
-
-def filter_by_threshold(data, treatment, threshold, is_above):
-    """
-    :param data: full dictionary from the Excel file
-    :param treatment: the desire key, a string
-    :param threshold: an integer that split the range of values to two, larger\smaller(or equal) than it
-    :param is_above: 1 or 0, check "above" the threshold or under
-    :return: one dictionary, containing the values above \ under the threshold, depends on the is_above variable
-    """
-    dict_1 = {}
-    dict_2 = {}
-    values_of_feature = [0 if a > threshold else 1 for a in data.get(treatment)]
-    for key in data:
-        d1_key_value = []  # above threshold
-        d2_key_value = []  # equal or under threshold
-        for i in range(len(values_of_feature)):
-            # checks for each item which dictionary is appropriate for him
-            d2_key_value.append(data.get(key)[i]) if values_of_feature[i] else d1_key_value.append(data.get(key)[i])
-        dict_1.update({key: d1_key_value})
-        dict_2.update({key: d2_key_value})
-    return dict_1 if is_above else dict_2

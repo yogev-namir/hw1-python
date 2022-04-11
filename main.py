@@ -22,6 +22,7 @@ def main(argv):
     holder are just spare dictionaries to store the second returned dictionary,
     they are not being used during the program
     """
+    print(features[3])
     data_summer, holder = data.filter_by_feature(dictionary, features[3], SUMMER)
     data_holiday, holder = data.filter_by_feature(dictionary, features[4], HOLIDAY)
     print(f"Question 1:")
